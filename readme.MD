@@ -5,10 +5,16 @@
 
 ---
 
-### Dependecias
-
-Para instalar las dependencias necesarias, ejecutar:
+### Ejecucion:
 
 ```bash
+git clone https://github.com/gongalito/modelo-lineal-estatura.git
+
+cd modelo-lineal-estatura
+
 pip install -r requirements.txt
+
+python main.py
+
+python convergencia_RMSE.py
 ```
