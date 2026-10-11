@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 
 from estandarizacion import estandarizar_y_limpiar_datos
 from estimacion_modelo import preparar_matrices, estimar_mco, evaluar_modelo
-from cross_validation import ejecutar_cross_validation_repetida
 
 
 def graficar_resultados(df_train, df_test, beta):
@@ -91,13 +90,6 @@ def main():
     ecm_tr, rmse_tr, r2_tr = evaluar_modelo(X_train, y_train, beta)
     ecm_ts, rmse_ts, r2_ts = evaluar_modelo(X_test, y_test, beta)
 
-    # Cross validation
-    k_folds = 5
-    n_repeticiones = 1000
-    rmse_cv_mean, rmse_cv_std = ejecutar_cross_validation_repetida(
-        df, k=k_folds, n_repeticiones=n_repeticiones
-    )
-
     # Resultados
     print("\n" + "=" * 50)
     print("  ECUACIÓN DEL MODELO DE REGRESIÓN LINEAL")
@@ -110,12 +102,6 @@ def main():
     print("=" * 50)
     print(f"TRAIN -> R²: {r2_tr:.3f} | RMSE: {rmse_tr:.2f} cm | ECM: {ecm_tr:.2f}")
     print(f"TEST  -> R²: {r2_ts:.3f} | RMSE: {rmse_ts:.2f} cm | ECM: {ecm_ts:.2f}")
-
-    print("\n" + "=" * 50)
-    print(f"  VALIDACIÓN CRUZADA REPETIDA ({n_repeticiones} exec x {k_folds}-Fold)")
-    print("=" * 50)
-    print(f"RMSE Promedio Global: {rmse_cv_mean:.2f} cm (± {rmse_cv_std:.2f} cm)")
-    print("=" * 50)
 
     # Grafica
     graficar_resultados(train_df, test_df, beta)
